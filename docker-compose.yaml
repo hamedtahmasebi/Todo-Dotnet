@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+    mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: todo-sql-server
+        ports:
+            - "5000:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=RH6a6MynMMNFWa
+            - MSSQL_PID=Developer # Other options: Express, Standard, Enterprise
+        volumes:
+            - mssql_data:/var/opt/mssql
+        restart: unless-stopped
+
+volumes:
+    mssql_data:
