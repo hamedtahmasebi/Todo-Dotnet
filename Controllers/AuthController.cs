@@ -75,7 +75,7 @@ public class AuthController(
                 Token = token,
                 Expiration = DateTime.UtcNow.AddDays(30),
                 UserId = user.Id,
-                Email = user.Email
+                Email = user.Email ?? ""
             });
         }
 
@@ -90,6 +90,8 @@ public class AuthController(
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null) return NotFound();
+
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user == null) return NotFound("User not found");
@@ -116,6 +118,8 @@ public class AuthController(
     public async Task<IActionResult> GetProfile()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null) return NotFound();
+
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user == null) return NotFound("User not found");
