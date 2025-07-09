@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using TodoApi.Models.Task;
 using TodoApi.Models.Team;
-using TodoApi.Models.Todo;
 using TodoApi.Models.User;
 
 namespace TodoApi.Data
@@ -10,7 +10,7 @@ namespace TodoApi.Data
 
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public DbSet<TodoItem> Todos { get; set; }
+        public DbSet<TaskItem> Tasks { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamAdmin> TeamAdmins { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
