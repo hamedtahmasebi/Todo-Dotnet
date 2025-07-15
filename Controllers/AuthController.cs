@@ -17,7 +17,7 @@ public class AuthController(
     ILogger<AuthController> _logger) : ControllerBase
 {
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto model)
+    public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterDto model)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -52,7 +52,7 @@ public class AuthController(
 
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto model)
+    public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginDto model)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
