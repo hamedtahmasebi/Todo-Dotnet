@@ -44,7 +44,7 @@ namespace TodoApi.Controllers
                 Content = t.Content,
                 Deadline = t.Deadline,
                 Id = t.Id,
-                Priority = t.Priority,
+                Priority = t.Priority.ToString(),
                 SubtaskIds = t.Subtasks.Select(st => st.Id).ToList()
             })
             .Where(t => t.UserId == userId &&
@@ -90,7 +90,7 @@ namespace TodoApi.Controllers
                 Content = t.Content,
                 Deadline = t.Deadline,
                 Id = t.Id,
-                Priority = t.Priority,
+                Priority = t.Priority.ToString(),
                 SubtaskIds = t.Subtasks.Select(st => st.Id).ToList()
             }).Where(t => t.UserId == userId).FirstAsync();
 
@@ -114,7 +114,7 @@ namespace TodoApi.Controllers
 
             if (data.Title != null) task.Title = data.Title;
             if (data.Content != null) task.Content = data.Content;
-            if (data.Priority != null) task.Priority = data.Priority;
+            task.Priority = data.Priority;
             if (data.Deadline != null) task.Deadline = data.Deadline;
 
             await _context.SaveChangesAsync();
